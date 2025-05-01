@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".ui.splash.SplashActivity"
+    android:background="#1A2D69">
+
+    <ImageView
+        android:id="@+id/splashLogo"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="24dp"
+        android:src="@drawable/ic_logo"
+        android:contentDescription="@string/app_name"
+        android:background="@drawable/rounded_white_background"
+        android:padding="16dp" />
+
+    <TextView
+        android:id="@+id/splashText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="APP\nRECARGA\nMETROPOLITANO"
+        android:textColor="@android:color/white"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:lineSpacingExtra="4dp" />
+
+</LinearLayout>

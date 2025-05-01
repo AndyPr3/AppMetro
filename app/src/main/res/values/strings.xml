@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">AppMetro</string>
+    <string-array name="tipos_documento">
+        <item>DNI</item>
+        <item>CE</item>
+        <item>Pasaporte</item>
+    </string-array>
+</resources>

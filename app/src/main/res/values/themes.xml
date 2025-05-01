@@ -1,0 +1,21 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Tema base de la app -->
+    <style name="Base.Theme.AppMetro" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Colores base aquí si los usas -->
+    </style>
+
+    <!-- Tema principal de la app -->
+    <style name="Theme.AppMetro" parent="Base.Theme.AppMetro" />
+
+    <!-- Tema para el Splash Screen -->
+    <style name="Theme.AppMetro.Splash" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Fondo del Splash Screen -->
+        <item name="android:windowBackground">@color/splash_background</item>
+        <!-- Deshabilitar barra de título y hacer pantalla completa -->
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <!-- Deshabilitar la Splash Screen API predeterminada -->
+    </style>
+
+</resources>
