@@ -1,8 +1,11 @@
 <resources>
-    <string name="app_name">AppMetro</string>
-    <string-array name="tipos_documento">
-        <item>DNI</item>
-        <item>CE</item>
-        <item>Pasaporte</item>
-    </string-array>
+    <string name="app_name">MetroPass</string>
+    <string name="api_base_url">http://192.168.18.10:3000/</string>
+    <string name="open_drawer">Abrir menú lateral</string>
+    <string name="close_drawer">Cerrar menú lateral</string>
+    <string name="texto_politica">
+    Lorem At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium...
+        Lorem At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium...
+        Lorem At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium...
+    </string>
 </resources>
