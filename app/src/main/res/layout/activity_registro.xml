@@ -3,27 +3,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
-    tools:context=".ui.registro.RegistroActivity"
+    tools:context=".activities.RegistroActivity"
     android:background="#FAFAFA">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="32dp"
+        android:paddingHorizontal="32dp"
+        android:paddingTop="80dp"
         android:gravity="center_horizontal">
 
-        <ImageView
-            android:id="@+id/btnBack"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:layout_gravity="start"
-            android:src="@drawable/ic_back"
-            android:background="@drawable/rounded_white_background"
-            android:padding="8dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="16dp" />
 
         <ImageView
             android:id="@+id/imageLogo"
@@ -48,57 +40,91 @@
             android:orientation="horizontal"
             android:layout_marginBottom="16dp">
 
-            <Spinner
-                android:id="@+id/spinnerTipoDoc"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilDocType"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                app:boxBackgroundMode="outline"
                 android:layout_width="100dp"
-                android:layout_height="49dp"
-                android:background="@drawable/spinner_background"
-                android:entries="@array/tipos_documento"
-                android:paddingStart="8dp"
-                android:spinnerMode="dropdown"
-                android:paddingEnd="8dp" />
+                android:layout_height="wrap_content"
+                android:hint="Tipo"
+                android:layout_marginRight="10dp"
+                app:endIconMode="dropdown_menu"
+                >
+                <AutoCompleteTextView
+                    android:id="@+id/actvDocType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:padding="12dp"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <EditText
-                android:id="@+id/edtNumeroDoc"
-                android:layout_width="0dp"
-                android:layout_height="48dp"
-                android:layout_weight="1"
-                android:layout_marginStart="8dp"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilDocNumber"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                app:boxBackgroundMode="outline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:hint="Número documento"
-                android:background="@drawable/edittext_background"
-                android:inputType="number"
-                android:padding="12dp" />
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtDocNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"/>
+            </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
-        <EditText
-            android:id="@+id/edtNumeroTarjeta"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilCardNumber"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            app:boxBackgroundMode="outline"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Número de tarjeta"
-            android:inputType="number"
-            android:background="@drawable/edittext_background"
-            android:padding="12dp"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginBottom="16dp"
+            >
 
-        <EditText
-            android:id="@+id/edtCorreo"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtCardNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilEmail"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            app:boxBackgroundMode="outline"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Correo electrónico"
-            android:inputType="textEmailAddress"
-            android:background="@drawable/edittext_background"
-            android:padding="12dp"
-            android:layout_marginBottom="24dp" />
+            android:layout_marginBottom="16dp"
+            >
 
-        <EditText
-            android:id="@+id/edtPassword"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilPassword"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:boxBackgroundMode="outline"
+            app:endIconMode="password_toggle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
             android:hint="Contraseña"
-            android:inputType="textPassword"
-            android:background="@drawable/edittext_background"
-            android:padding="12dp"
-            android:layout_marginBottom="24dp" />
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/btnRegistrarme"
