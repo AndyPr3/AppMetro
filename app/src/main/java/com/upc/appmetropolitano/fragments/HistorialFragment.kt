@@ -29,7 +29,7 @@ class HistorialFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val ctx = requireContext()
 
-        val tvAccount = view.findViewById<TextView>(R.id.tv_account_historial)
+        val txtCardNumber = view.findViewById<TextView>(R.id.txtCardNumber)
         val spinnerYear = view.findViewById<Spinner>(R.id.spinner_year)
         val spinnerMonth = view.findViewById<Spinner>(R.id.spinner_month)
         val rv = view.findViewById<RecyclerView>(R.id.rv_movements)
@@ -37,7 +37,7 @@ class HistorialFragment : Fragment() {
 
         val cardId = SessionManager.getDefaultCardId(ctx)
         val cardNumber = SessionManager.getCardNumber(ctx)
-        tvAccount.text = "Principal (#$cardNumber)"
+        txtCardNumber.text = "Tarjeta #$cardNumber"
 
         val currentYear = Calendar.getInstance().get(Calendar.YEAR)
         val years = (currentYear downTo (currentYear - 4)).map { it.toString() }

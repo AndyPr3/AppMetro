@@ -11,5 +11,7 @@
     <color name="bg_color">#F9F9F9</color>
     <color name="red">#FF0000</color>
     <color name="yellow">#FFC400</color>
+    <color name="light">#636C8F</color>
+    636C8F
 
 </resources>

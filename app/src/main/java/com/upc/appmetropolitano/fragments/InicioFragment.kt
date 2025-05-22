@@ -41,7 +41,7 @@ class InicioFragment : Fragment() {
             val rv = view.findViewById<RecyclerView>(R.id.rv_movimientos)
             rv.layoutManager = LinearLayoutManager(view.context)
 
-            txtCardNumber.text = card.cardNumber
+            txtCardNumber.text = "Tarjeta #${card.cardNumber}"
             txtSaldo.text = "S/${card.balance.toString()}"
 
             rv.adapter = MovimientosAdapter(card.history) { mov ->

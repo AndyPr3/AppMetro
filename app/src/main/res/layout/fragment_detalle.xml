@@ -41,6 +41,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
+                    android:textColor="@color/primary"
                     android:text="#Tarjeta"
                     android:textAppearance="?attr/textAppearanceBody1"/>
             </LinearLayout>
@@ -88,7 +89,6 @@
                         android:layout_height="wrap_content"
                         android:text="- S/ 0.00"
                         android:textAppearance="?attr/textAppearanceBody1"
-                        android:textColor="#ff00cc"
                         android:textStyle="bold"/>
                 </LinearLayout>
 
