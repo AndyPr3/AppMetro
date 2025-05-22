@@ -44,8 +44,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:text="# Tarjeta"
-                        android:textSize="14sp" />
+                        android:textColor="@color/primary"
+                        android:text="Tarjeta #"
+                        android:textSize="16sp" />
                 </LinearLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -53,23 +54,24 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="10dp"
                     app:prefixText="S/ "
                     android:hint="Ingrese un monto válido"
                     app:placeholderText="0"
                     app:expandedHintEnabled="false"
                     app:boxBackgroundMode="outline"
                     >
+
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/txtMonto"
-                        android:layout_gravity="center"
-                        android:layout_width="300dp"
+                        android:layout_width="305dp"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_marginHorizontal="16dp"
                         android:gravity="center"
                         android:inputType="numberDecimal"
-                        android:textSize="24sp"
-                        />
+                        android:textSize="24sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
 

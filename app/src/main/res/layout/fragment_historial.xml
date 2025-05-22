@@ -33,11 +33,13 @@
                 android:src="@drawable/ic_credit_card" />
 
             <TextView
-                android:id="@+id/tv_account_historial"
+                android:id="@+id/txtCardNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="Principal (#3316112101)"
+                android:textColor="@color/primary"
+                android:textSize="16sp"
+                android:text="Tarjeta #"
                 android:textAppearance="?attr/textAppearanceBody1" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>

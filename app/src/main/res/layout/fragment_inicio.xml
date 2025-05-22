@@ -39,8 +39,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
-                    android:text="Principal (#3316112101)"
-                    android:textSize="14sp"/>
+                    android:textColor="@color/primary"
+                    android:text="Tarjeta #"
+                    android:textSize="16sp"/>
             </LinearLayout>
 
             <TextView
@@ -49,6 +50,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="16dp"
+                android:textColor="@color/primary"
                 android:text="S/00.00"
                 android:textSize="32sp"
                 android:textStyle="bold"/>
@@ -59,6 +61,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="4dp"
                 android:text="Saldo Disponible"
+                android:textColor="@color/primary"
                 android:textSize="14sp"/>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
