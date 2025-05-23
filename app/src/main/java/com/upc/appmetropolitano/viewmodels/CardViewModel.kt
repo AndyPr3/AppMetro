@@ -14,9 +14,12 @@ class CardViewModel (app: Application): AndroidViewModel(app) {
     val cardInfo = MutableLiveData<CardModel>()
     val cardHistory = MutableLiveData<List<TransactionModel>>()
     val errorMsg = MutableLiveData<String>()
+    val loading = MutableLiveData<Boolean>()
 
     fun info(userId: Int, cardId: Int) {
+        loading.postValue(true)
         repo.info(userId, cardId) { res ->
+            loading.postValue(false)
             when (res) {
                 is ApiResult.Success -> cardInfo.postValue(res.data)
                 is ApiResult.Failure -> errorMsg.postValue(res.error.message)
@@ -25,7 +28,9 @@ class CardViewModel (app: Application): AndroidViewModel(app) {
     }
 
     fun history(cardId: Int, year: Int, month: Int) {
+        loading.postValue(true)
         repo.history(cardId, year, month) { res ->
+            loading.postValue(false)
             when (res) {
                 is ApiResult.Success -> cardHistory.postValue(res.data)
                 is ApiResult.Failure -> errorMsg.postValue(res.error.message)

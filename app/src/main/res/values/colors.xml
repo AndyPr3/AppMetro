@@ -12,6 +12,5 @@
     <color name="red">#FF0000</color>
     <color name="yellow">#FFC400</color>
     <color name="light">#636C8F</color>
-    636C8F
-
+    <color name="overlay">#80000000</color>
 </resources>

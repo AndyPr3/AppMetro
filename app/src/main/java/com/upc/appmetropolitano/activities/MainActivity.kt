@@ -2,6 +2,8 @@ package com.upc.appmetropolitano.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 
@@ -69,6 +71,16 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    fun showLoading() {
+        val overlay = findViewById<FrameLayout>(R.id.loading)
+        overlay.visibility = View.VISIBLE
+    }
+
+    fun hideLoading() {
+        val overlay = findViewById<FrameLayout>(R.id.loading)
+        overlay.visibility = View.GONE
+    }
+
     private fun setupBottomNav() {
         bottomNav.setOnItemSelectedListener { item ->
             val name = SessionManager.getFirtsName(this)
@@ -77,7 +89,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_inicio -> InicioFragment()
                 R.id.nav_recarga -> RecargaFragment()
                 R.id.nav_historial -> HistorialFragment()
-                else               -> null
+                else -> null
             }
             fragment?.let {
                 supportFragmentManager.beginTransaction()
@@ -94,13 +106,19 @@ class MainActivity : AppCompatActivity() {
     private fun setupDrawerNav() {
         navView.setNavigationItemSelectedListener { menuItem ->
 
-            drawerLayout.closeDrawer(GravityCompat.START)
-
             val fragment = when(menuItem.itemId) {
                 R.id.nav_profile -> PerfilFragment()
                 R.id.nav_settings -> AjustesFragment()
                 R.id.nav_privacy -> PoliticasFragment()
                 R.id.nav_bus_routes -> RutasFragment()
+                R.id.nav_cards -> {
+                    Toast.makeText(this, "Sección 'Mis tarjetas' en desarrollo", Toast.LENGTH_SHORT).show()
+                    null
+                }
+                R.id.nav_payment_methods -> {
+                    Toast.makeText(this, "Sección 'Métodos de pago' en desarrollo", Toast.LENGTH_SHORT).show()
+                    null
+                }
                 R.id.nav_logout -> {
 
                     MaterialAlertDialogBuilder(this)
@@ -121,20 +139,19 @@ class MainActivity : AppCompatActivity() {
 
                     null
                 }
-                else                     -> null
+                else -> null
             }
 
             fragment?.let {
                 supportFragmentManager
                     .beginTransaction()
                     .replace(R.id.fragment_container, it)
-                    .addToBackStack(null)
                     .commit()
 
                 toolbar.title = menuItem.title
                 supportActionBar?.title = menuItem.title
             }
-
+            drawerLayout.closeDrawer(GravityCompat.START)
             true
         }
     }

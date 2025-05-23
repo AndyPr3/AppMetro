@@ -50,7 +50,8 @@ dependencies {
     implementation("androidx.drawerlayout:drawerlayout:1.1.1")
     implementation("com.android.volley:volley:1.2.1")
     implementation("androidx.core:core-splashscreen:1.0.0")
-
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
 
 
 }

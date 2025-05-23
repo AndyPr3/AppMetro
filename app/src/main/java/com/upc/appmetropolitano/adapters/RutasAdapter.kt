@@ -57,6 +57,17 @@ class RutasAdapter(
                 content.visibility     = View.GONE
                 arrow.setImageResource(R.drawable.ic_arrow_down)
             }
+
+            val context = itemView.context
+            val imageResId = context.resources.getIdentifier(
+                m.mapImagePath, "drawable", context.packageName
+            )
+            if (imageResId != 0) {
+                imgRecorrido.setImageResource(imageResId)
+            } else {
+                imgRecorrido.setImageResource(R.drawable.im_map)
+            }
+
         }
     }
 }

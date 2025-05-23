@@ -13,9 +13,12 @@ class AuthViewModel (app: Application): AndroidViewModel(app) {
     val user = MutableLiveData<UserModel>()
     val errorMsg = MutableLiveData<String>()
     val saveStatus = MutableLiveData<Boolean>()
+    val loading = MutableLiveData<Boolean>()
 
     fun login(email: String, password: String) {
+        loading.postValue(true)
         repo.login(email, password) { res ->
+            loading.postValue(false)
             when (res) {
                 is ApiResult.Success -> user.postValue(res.data)
                 is ApiResult.Failure -> errorMsg.postValue(res.error.message)
@@ -24,7 +27,9 @@ class AuthViewModel (app: Application): AndroidViewModel(app) {
     }
 
     fun register(documentType: String, documentNumber: String, cardNumber: String, email: String, password: String) {
+        loading.postValue(true)
         repo.register(documentType, documentNumber, cardNumber, email, password) { res ->
+            loading.postValue(false)
             when (res) {
                 is ApiResult.Success -> saveStatus.postValue(true)
                 is ApiResult.Failure -> errorMsg.postValue(res.error.message)

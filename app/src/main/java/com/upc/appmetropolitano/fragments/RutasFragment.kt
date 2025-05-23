@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.upc.appmetropolitano.R
+import com.upc.appmetropolitano.activities.MainActivity
 import com.upc.appmetropolitano.adapters.RutasAdapter
 import com.upc.appmetropolitano.models.BusRouteModel
 import com.upc.appmetropolitano.viewmodels.BusRouteViewModel
@@ -46,6 +47,10 @@ class RutasFragment : Fragment() {
             }
             adapter.notifyDataSetChanged()
         }
+        vm.loading.observe(viewLifecycleOwner) { isLoading ->
+            if (isLoading) showLoading()
+            else hideLoading()
+        }
         vm.errorMsg.observe(viewLifecycleOwner ) { msg ->
             Toast.makeText(view.context, "Error: $msg", Toast.LENGTH_LONG).show()
         }
@@ -53,6 +58,14 @@ class RutasFragment : Fragment() {
         vm.routes()
 
 
+    }
+
+    private fun showLoading(){
+        (activity as? MainActivity)?.showLoading()
+    }
+
+    private fun hideLoading(){
+        (activity as? MainActivity)?.hideLoading()
     }
 
     companion object {

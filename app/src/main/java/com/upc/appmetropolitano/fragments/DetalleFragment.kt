@@ -66,6 +66,10 @@ class DetalleFragment : Fragment(R.layout.fragment_detalle) {
             txtSaldo.text = "S/${item.amount}"
             txtFecha.text = "${item.transactionDate}"
         }
+        vm.loading.observe(viewLifecycleOwner) { isLoading ->
+            if (isLoading) showLoading()
+            else hideLoading()
+        }
         vm.errorMsg.observe(viewLifecycleOwner ) { msg ->
             Toast.makeText(view.context, "Error: $msg", Toast.LENGTH_LONG).show()
         }
@@ -77,4 +81,11 @@ class DetalleFragment : Fragment(R.layout.fragment_detalle) {
         }
     }
 
+    private fun showLoading(){
+        (activity as? MainActivity)?.showLoading()
+    }
+
+    private fun hideLoading(){
+        (activity as? MainActivity)?.hideLoading()
+    }
 }

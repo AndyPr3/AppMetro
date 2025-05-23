@@ -14,6 +14,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.radiobutton.MaterialRadioButton
 import com.google.android.material.textfield.TextInputEditText
 import com.upc.appmetropolitano.R
+import com.upc.appmetropolitano.activities.MainActivity
 import com.upc.appmetropolitano.network.SessionManager
 import com.upc.appmetropolitano.viewmodels.TransactionViewModel
 class RecargaFragment : Fragment() {
@@ -23,6 +24,7 @@ class RecargaFragment : Fragment() {
     private lateinit var txtCardNumber :TextView
     private lateinit var txtMonto :TextInputEditText
     private lateinit var vm: TransactionViewModel
+    private lateinit var btnPay: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,11 +54,10 @@ class RecargaFragment : Fragment() {
             if (isChecked) rbCard.isChecked = false
         }
 
-        val btnPay = view.findViewById<Button>(R.id.btnPagar)
+        btnPay = view.findViewById(R.id.btnPagar)
+
         txtMonto = view.findViewById(R.id.txtMonto)
-
         txtCardNumber = view.findViewById(R.id.txtCardNumber)
-
         txtCardNumber.text = "Tarjeta : #$cardNumber"
 
         vm = ViewModelProvider(this)[TransactionViewModel::class.java]
@@ -64,6 +65,10 @@ class RecargaFragment : Fragment() {
             if (ok) successRecarga(view)
             else
                 Toast.makeText(view.context, "Error: No se pude realizar la recarga.", Toast.LENGTH_LONG).show()
+        }
+        vm.loading.observe(viewLifecycleOwner) { isLoading ->
+            if (isLoading) showLoading(view)
+            else hideLoading(view)
         }
         vm.errorMsg.observe(viewLifecycleOwner ) { msg ->
             Toast.makeText(view.context, "Error: $msg", Toast.LENGTH_LONG).show()
@@ -86,6 +91,18 @@ class RecargaFragment : Fragment() {
             vm.register(cardNumber, selectedMethod, txtMonto.text.toString().toDouble(), "R", "" )
 
         }
+    }
+
+    private fun showLoading(view: View){
+        btnPay = view.findViewById(R.id.btnPagar)
+        btnPay.isEnabled = false
+        (activity as? MainActivity)?.showLoading()
+    }
+
+    private fun hideLoading(view: View){
+        btnPay = view.findViewById(R.id.btnPagar)
+        btnPay.isEnabled = true
+        (activity as? MainActivity)?.hideLoading()
     }
 
     private fun limpiar(){

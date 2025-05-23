@@ -68,18 +68,17 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/til_limite_alerta"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:layout_weight="1"
-                    app:boxBackgroundMode="outline"
                     app:boxStrokeColor="@color/primary">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_limite_alerta"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:hint="S/ 0.00"
+                        android:hint="S/"
+                        android:textAlignment="center"
                         android:inputType="number" />
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>

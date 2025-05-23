@@ -26,16 +26,24 @@ class BusRouteApiClient (private val ctx: Context){
                             code   = o.getString("code"),
                             type   = o.getString("type"),
                             schedule = o.optString("schedule", ""),
-                            mapImagePath  = o.optString("mapImagePath", "")
+                            mapImagePath  = o.optString("mapImagePath", ""),
+                            isExpanded = o.optString("code","") == "A"
                         )
                     }
                     callback(ApiResult.Success(lista))
                 } else {
-                    val err = resp.getJSONObject("error")
-                    callback(
-                        ApiResult.Failure(
-                        ApiError(err.getString("code"), err.getString("message"))
-                    ))
+                    val errObj = resp.optJSONObject("error")
+                    if(errObj!=null){
+                        val apiErr = ApiError(
+                            code    = errObj.getString("code"),
+                            message = errObj.getString("message")
+                        )
+                        callback(ApiResult.Failure(apiErr))
+                    } else {
+                        callback(ApiResult.Failure(
+                            ApiError("UNKNOWN_ERROR", "Error al consultar el servicio.")
+                        ))
+                    }
                 }
             },
             { volleyErr ->

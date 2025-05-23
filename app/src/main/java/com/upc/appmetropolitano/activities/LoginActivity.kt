@@ -2,6 +2,7 @@ package com.upc.appmetropolitano.activities
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -11,6 +12,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.android.material.textfield.TextInputEditText
 import com.upc.appmetropolitano.R
 import com.upc.appmetropolitano.network.SessionManager
@@ -18,8 +20,9 @@ import com.upc.appmetropolitano.viewmodels.AuthViewModel
 
 class LoginActivity : AppCompatActivity() {
 
-    private lateinit var btnIniciar: Button
     private lateinit var vm: AuthViewModel
+    private lateinit var loading: CircularProgressIndicator
+    private lateinit var btnIniciar:Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         val splash = installSplashScreen()
@@ -32,8 +35,9 @@ class LoginActivity : AppCompatActivity() {
             v.setPadding(bars.left, bars.top, bars.right, bars.bottom)
             insets
         }
-
+        loading = findViewById(R.id.loading)
         btnIniciar = findViewById(R.id.btnIniciarSesion)
+
         val txtEmail    = findViewById<TextInputEditText>(R.id.txtEmail)
         val txtPassword = findViewById<TextInputEditText>(R.id.txtPassword)
         val txtRegistrar = findViewById<TextView>(R.id.txtRegistrar)
@@ -54,6 +58,10 @@ class LoginActivity : AppCompatActivity() {
             Log.i("LOGIN", "Usuario logueado: $user")
             goToMain()
         }
+        vm.loading.observe(this) { isLoading ->
+            if (isLoading) showLoading()
+            else hideLoading()
+        }
         vm.errorMsg.observe(this) { msg ->
             Toast.makeText(this, "Error: $msg", Toast.LENGTH_LONG).show()
         }
@@ -72,7 +80,6 @@ class LoginActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
             vm.login(email, pass)
-            //onLogin(email, pass)
         }
     }
 
@@ -80,6 +87,16 @@ class LoginActivity : AppCompatActivity() {
         var intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()
+    }
+
+    private fun showLoading(){
+        loading.visibility = View.VISIBLE
+        btnIniciar.isEnabled = false
+    }
+
+    private fun hideLoading(){
+        loading.visibility = View.GONE
+        btnIniciar.isEnabled = true
     }
 
 }

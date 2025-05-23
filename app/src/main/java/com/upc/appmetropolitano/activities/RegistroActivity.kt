@@ -2,6 +2,7 @@ package com.upc.appmetropolitano.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
@@ -13,6 +14,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.android.material.textfield.TextInputEditText
 import com.upc.appmetropolitano.R
 import com.upc.appmetropolitano.viewmodels.AuthViewModel
@@ -20,6 +22,9 @@ import com.upc.appmetropolitano.viewmodels.AuthViewModel
 class RegistroActivity : AppCompatActivity() {
 
     private lateinit var vm: AuthViewModel
+    private lateinit var loading: CircularProgressIndicator
+    private lateinit var btnRegistro:Button
+    private lateinit var btnIniciarSesion:TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,14 +36,15 @@ class RegistroActivity : AppCompatActivity() {
             insets
         }
 
+        loading = findViewById(R.id.loading)
+        btnRegistro = findViewById(R.id.btnRegistrarme)
+        btnIniciarSesion = findViewById(R.id.txtIniciarSesion)
+
         val actvDocType = findViewById<AutoCompleteTextView>(R.id.actvDocType)
         val txtDocNumber    = findViewById<TextInputEditText>(R.id.txtDocNumber)
         val txtCardNumber    = findViewById<TextInputEditText>(R.id.txtCardNumber)
         val txtEmail    = findViewById<TextInputEditText>(R.id.txtEmail)
         val txtPassword = findViewById<TextInputEditText>(R.id.txtPassword)
-
-        val btnRegistro = findViewById<Button>(R.id.btnRegistrarme)
-        val btnIniciarSesion = findViewById<TextView>(R.id.txtIniciarSesion)
 
         val tipos = listOf("DNI")
         val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, tipos)
@@ -50,6 +56,10 @@ class RegistroActivity : AppCompatActivity() {
             else {
                 Toast.makeText(this, "Error: Hubo un error al registrarse.", Toast.LENGTH_LONG).show()
             }
+        }
+        vm.loading.observe(this) { isLoading ->
+            if (isLoading) showLoading()
+            else hideLoading()
         }
         vm.errorMsg.observe(this) { msg ->
             Toast.makeText(this, "Error: $msg", Toast.LENGTH_LONG).show()
@@ -84,6 +94,18 @@ class RegistroActivity : AppCompatActivity() {
     private fun goToLogin(){
         var intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
+    }
+
+    private fun showLoading(){
+        loading.visibility = View.VISIBLE
+        btnIniciarSesion.isEnabled = false
+        btnRegistro.isEnabled = false
+    }
+
+    private fun hideLoading(){
+        loading.visibility = View.GONE
+        btnIniciarSesion.isEnabled = true
+        btnRegistro.isEnabled = true
     }
 
     private fun successRegistrer(){

@@ -1,7 +1,6 @@
 package com.upc.appmetropolitano.repository
 
 import com.upc.appmetropolitano.models.ApiResult
-import com.upc.appmetropolitano.models.BusRouteModel
 import com.upc.appmetropolitano.models.CardModel
 import com.upc.appmetropolitano.models.TransactionModel
 import com.upc.appmetropolitano.network.CardApiClient

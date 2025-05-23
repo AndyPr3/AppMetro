@@ -11,9 +11,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.upc.appmetropolitano.R
+import com.upc.appmetropolitano.activities.MainActivity
 import com.upc.appmetropolitano.adapters.MovimientosAdapter
 import com.upc.appmetropolitano.network.SessionManager
 import com.upc.appmetropolitano.viewmodels.CardViewModel
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 class InicioFragment : Fragment() {
 
@@ -34,7 +38,10 @@ class InicioFragment : Fragment() {
         val userId = SessionManager.getUserId(requireContext())
 
         val txtCardNumber = view.findViewById<TextView>(R.id.txtCardNumber)
+        val txtUltimosMov = view.findViewById<TextView>(R.id.txtUltimosMov)
         val txtSaldo = view.findViewById<TextView>(R.id.txtSaldo)
+
+        txtUltimosMov.text = "Últimos movimientos (${getMonthName()})"
 
         vm = ViewModelProvider(this)[CardViewModel::class.java]
         vm.cardInfo.observe(viewLifecycleOwner ){ card ->
@@ -51,6 +58,10 @@ class InicioFragment : Fragment() {
                     .commit()
             }
         }
+        vm.loading.observe(viewLifecycleOwner) { isLoading ->
+            if (isLoading) showLoading()
+            else hideLoading()
+        }
         vm.errorMsg.observe(viewLifecycleOwner ) { msg ->
             Toast.makeText(view.context, "Error: $msg", Toast.LENGTH_LONG).show()
         }
@@ -58,6 +69,20 @@ class InicioFragment : Fragment() {
         if (defaultCardId != -1) {
             vm.info(userId, defaultCardId)
         }
+    }
+
+    private fun getMonthName(): String{
+        val calendar = Calendar.getInstance()
+        val sdf = SimpleDateFormat("MMMM", Locale("es", "ES"))
+        return sdf.format(calendar.time)
+    }
+
+    private fun showLoading(){
+        (activity as? MainActivity)?.showLoading()
+    }
+
+    private fun hideLoading(){
+        (activity as? MainActivity)?.hideLoading()
     }
 
     companion object {

@@ -12,9 +12,12 @@ class BusRouteViewModel (app: Application): AndroidViewModel(app) {
     private val repo = BusRouteRepository(BusRouteApiClient(app))
     val errorMsg = MutableLiveData<String>()
     val responseBus = MutableLiveData<List<BusRouteModel>>()
+    val loading = MutableLiveData<Boolean>()
 
     fun routes() {
+        loading.postValue(true)
         repo.routes() { res ->
+            loading.postValue(false)
             when (res) {
                 is ApiResult.Success -> responseBus.postValue(res.data)
                 is ApiResult.Failure -> errorMsg.postValue(res.error.message)

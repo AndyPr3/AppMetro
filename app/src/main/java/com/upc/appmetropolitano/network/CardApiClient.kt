@@ -46,11 +46,18 @@ class CardApiClient (private val ctx: Context){
                     )
                     callback(ApiResult.Success(model))
                 } else {
-                    val err = resp.getJSONObject("error")
-                    callback(
-                        ApiResult.Failure(
-                            ApiError(err.getString("code"), err.getString("message"))
+                    val errObj = resp.optJSONObject("error")
+                    if(errObj!=null){
+                        val apiErr = ApiError(
+                            code    = errObj.getString("code"),
+                            message = errObj.getString("message")
+                        )
+                        callback(ApiResult.Failure(apiErr))
+                    } else {
+                        callback(ApiResult.Failure(
+                            ApiError("UNKNOWN_ERROR", "Error al consultar el servicio.")
                         ))
+                    }
                 }
             },
             { volleyErr ->
@@ -90,11 +97,18 @@ class CardApiClient (private val ctx: Context){
                     }
                     callback(ApiResult.Success(list))
                 } else {
-                    val err = resp.getJSONObject("error")
-                    callback(
-                        ApiResult.Failure(
-                            ApiError(err.getString("code"), err.getString("message"))
+                    val errObj = resp.optJSONObject("error")
+                    if(errObj!=null){
+                        val apiErr = ApiError(
+                            code    = errObj.getString("code"),
+                            message = errObj.getString("message")
+                        )
+                        callback(ApiResult.Failure(apiErr))
+                    } else {
+                        callback(ApiResult.Failure(
+                            ApiError("UNKNOWN_ERROR", "Error al consultar el servicio.")
                         ))
+                    }
                 }
             },
             { volleyErr ->

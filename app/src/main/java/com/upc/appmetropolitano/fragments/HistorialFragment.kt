@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.upc.appmetropolitano.R
+import com.upc.appmetropolitano.activities.MainActivity
 import com.upc.appmetropolitano.adapters.MovimientosAdapter
 import com.upc.appmetropolitano.network.SessionManager
 import com.upc.appmetropolitano.viewmodels.CardViewModel
@@ -69,6 +70,10 @@ class HistorialFragment : Fragment() {
                     .commit()
             }
         }
+        vm.loading.observe(viewLifecycleOwner) { isLoading ->
+            if (isLoading) showLoading()
+            else hideLoading()
+        }
         vm.errorMsg.observe(viewLifecycleOwner ) { msg ->
             Toast.makeText(view.context, "Error: $msg", Toast.LENGTH_LONG).show()
         }
@@ -92,7 +97,13 @@ class HistorialFragment : Fragment() {
         vm.history(cardId, year, month)
     }
 
+    private fun showLoading(){
+        (activity as? MainActivity)?.showLoading()
+    }
 
+    private fun hideLoading(){
+        (activity as? MainActivity)?.hideLoading()
+    }
 
     companion object {
         @JvmStatic fun newInstance() = HistorialFragment()
